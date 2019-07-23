@@ -16,12 +16,13 @@ class RocketChatAPI extends RESTDataSource {
         request.headers.set('X-User-Id', this.userId);
     }
 
-    static messageSearchResultReducer(message) {
+    static messageSearchResultReducer(message, roomId) {
         return {
             id: message._id,
             message: message.msg,
             author: message.u.name,
-            time: message.ts
+            time: message.ts,
+            roomId: roomId
         };
     }
 
@@ -30,7 +31,7 @@ class RocketChatAPI extends RESTDataSource {
         const response = await this.get('chat.search', { searchText: searchString, roomId: roomId });
 
         return Array.isArray(response.messages)
-            ? response.messages.map(message=> RocketChatAPI.messageSearchResultReducer(message))
+            ? response.messages.map(message=> RocketChatAPI.messageSearchResultReducer(message, roomId))
             : [];
     }
 
@@ -41,6 +42,12 @@ class RocketChatAPI extends RESTDataSource {
         );
 
         return _.flatten(allSearchResultsArrays);
+    }
+
+    async getRoomInfo({ roomId}) {
+        const response = await this.get('rooms.info', { roomId: roomId });
+
+        return response.room
     }
 }
 
