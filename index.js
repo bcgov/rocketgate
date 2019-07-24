@@ -4,21 +4,21 @@ require('dotenv').config({
 
 const {ApolloServer, gql} = require('apollo-server');
 
-const RocketChatAPI = require('../rocketgate/datasources/rocket.chat');
+const RocketChatAPI = require('./datasources/rocket.chat');
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
-const typeDefs = gql`
+const typeDefs = gql`      
     
   type SearchResult {
     id: String
     message: String
     author: String
     time: String
+    roomId: String    
   } 
 
   # The "Query" type is the root of all GraphQL queries.
-  # (A "Mutation" type will be covered later on.)
   type Query {    
     search( rooms: [String], searchString: String!): [SearchResult]
   }
@@ -32,7 +32,7 @@ const resolvers = {
             roomIds: process.env.ROCKETCHAT_ROOM_IDS.split(","),
             searchString: searchString
         })
-    },
+    }
 };
 
 // Start ApolloServer by passing type definitions (typeDefs) and the resolvers
@@ -51,5 +51,5 @@ const server = new ApolloServer({
 
 // This `listen` method launches a web-server.
 server.listen().then(({url}) => {
-    console.log(`🚀  Rocket.Chat GraphQL search gateway ready at ${url}`);
+    console.log(`🚀  RocketGate Rocket.Chat GraphQL search gateway ready at ${url}`);
 });
