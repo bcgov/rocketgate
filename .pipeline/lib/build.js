@@ -14,7 +14,9 @@ module.exports = (settings)=>{
     objects = objects.concat(oc.processBuidTemplate(`${templatesLocalBaseUrl}/bc.yaml`, {
         'param': {
             'NAME': phases[phase].name,
-            'VERSION': phases[phase].tag
+            'VERSION': phases[phase].tag,
+            'SOURCE_REPOSITORY_URL': oc.git.http_url,
+            'SOURCE_REPOSITORY_REF': oc.git.ref
         }
     }));
 
