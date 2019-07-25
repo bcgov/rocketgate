@@ -2,8 +2,8 @@ pipeline {
     agent none
      environment {
                 COMPONENT_NAME = 'RocketGate'
-                COMPONENT_HOME = 'rocketgate'
-                BUILD_TRIGGER_INCLUDES = '^rocketgate/'
+                COMPONENT_HOME = '.'
+                BUILD_TRIGGER_INCLUDES = ''
             }
     options {
         disableResume()
