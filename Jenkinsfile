@@ -3,7 +3,6 @@ pipeline {
      environment {
                 COMPONENT_NAME = 'RocketGate'
                 COMPONENT_HOME = '.'
-                BUILD_TRIGGER_INCLUDES = ''
             }
     options {
         disableResume()
@@ -12,15 +11,6 @@ pipeline {
         stage('Build') {
             agent { label 'build' }
             steps {
-               script {
-                   def filesInThisCommitAsString = sh(script:"git diff --name-only HEAD~1..HEAD | grep  '$BUILD_TRIGGER_INCLUDES' || echo -n ''", returnStatus: false, returnStdout: true).trim()
-                   def hasChangesInPath = (filesInThisCommitAsString.length() > 0)
-                   echo "${filesInThisCommitAsString}"
-                   if (!currentBuild.rawBuild.getCauses()[0].toString().contains('UserIdCause') && !hasChangesInPath){
-                       currentBuild.rawBuild.delete()
-                       error("No changes detected in the component path for $COMPONENT_NAME.")
-                   }
-               }
 
                echo "Aborting all running jobs for $COMPONENT_NAME..."
                script {
