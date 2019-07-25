@@ -11,7 +11,7 @@ module.exports = (settings)=>{
   const templatesLocalBaseUrl =oc.toFileUrl(path.resolve(__dirname, '../../openshift'))
 
   // The building of your cool app goes here ▼▼▼
-    objects = objects.concat(oc.processBuildTemplate(`${templatesLocalBaseUrl}/bc.yaml`, {
+    objects = objects.concat(oc.processBuidTemplate(`${templatesLocalBaseUrl}/bc.yaml`, {
         'param': {
             'NAME': phases[phase].name,
             'VERSION': phases[phase].tag
