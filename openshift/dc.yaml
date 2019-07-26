@@ -99,7 +99,7 @@ objects:
       haproxy.router.openshift.io/disable_cookies: 'true'
     name: ${NAME}${SUFFIX}
   spec:
-    host:
+    host: ${HOST}
     port:
       targetPort: web
     tls:
@@ -114,7 +114,7 @@ objects:
   kind: ConfigMap
   metadata:
       name: rocketgate-config
-  stringData:
+  data:
     rocketChatRooms: ${ROCKETCHAT_ROOM_IDS}
     rocketChatURL: ${ROCKETCHAT_BASE_URL}
 parameters:

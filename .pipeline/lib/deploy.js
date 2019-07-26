@@ -11,7 +11,7 @@ module.exports = (settings) => {
     const templatesLocalBaseUrl = oc.toFileUrl(path.resolve(__dirname, '../../openshift'))
     var objects = []
 
-    // The deployment of your cool app goes here ▼▼▼
+    // process deplyoment template using values provided from config
     objects = oc.processDeploymentTemplate(`${templatesLocalBaseUrl}/dc.yaml`, {
         param: {
             NAME: phases[phase].name,
@@ -20,6 +20,8 @@ module.exports = (settings) => {
             HOST: phases[phase].host ? phases[phase].host : `rocketgate-${phase}-${changeId}-${phases[phase].namespace}.pathfinder.gov.bc.ca`
         },
     });
+
+
 
     oc.applyRecommendedLabels(objects, phases[phase].name, phase, `${changeId}`, phases[phase].instance)
     oc.importImageStreams(objects, phases[phase].tag, phases.build.namespace, phases.build.tag)
