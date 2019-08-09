@@ -20,7 +20,7 @@ const typeDefs = gql`
 
   # The "Query" type is the root of all GraphQL queries.
   type Query {    
-    search( rooms: [String], searchString: String!): [SearchResult]
+    search( searchString: String!): [SearchResult]
   }
 `;
 
