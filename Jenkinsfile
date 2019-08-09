@@ -41,7 +41,7 @@ pipeline {
         stage('Deploy (PROD)') {
             agent { label 'deploy' }
             input {
-                message "Should we continue with deployment to TEST?"
+                message "Should we continue with deployment to PROD?"
                 ok "Yes!"
             }
             steps {
@@ -49,5 +49,16 @@ pipeline {
                 sh "cd $COMPONENT_HOME/.pipeline && ./npmw ci && ./npmw run deploy -- --pr=${CHANGE_ID} --env=prod"
             }
         }
+        stage('Cleanup') {
+                    agent { label 'deploy' }
+                    input {
+                        message "Should we clean up build and deployment artifacts related to this PR?"
+                        ok "Yes!"
+                    }
+                    steps {
+                        echo "Cleaning ..."
+                        sh "cd $COMPONENT_HOME/.pipeline && ./npmw ci && ./npmw run clean -- --pr=${CHANGE_ID} --env=dev"
+                    }
+                }
     }
 }
