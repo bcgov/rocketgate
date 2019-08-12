@@ -6,7 +6,8 @@ class RocketChatAPI extends RESTDataSource {
     constructor({ baseURL, authToken, userId}) {
         super();
 
-        this.baseURL = baseURL;
+        this.appURL = baseURL;
+        this.baseURL = `${baseURL}/api/v1/`;
         this.authToken = authToken;
         this.userId = userId;
     }
@@ -20,6 +21,7 @@ class RocketChatAPI extends RESTDataSource {
         return {
             id: message._id,
             message: message.msg,
+            url: `${this.appURL}/channel/${roomInfo.name}?msg=${message._id}`,
             author: message.u.name,
             time: message.ts,
             roomId: roomId

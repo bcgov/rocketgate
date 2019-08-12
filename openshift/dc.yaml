@@ -142,7 +142,7 @@ parameters:
   displayName: Rocket.Chat Base URL
   name: ROCKETCHAT_BASE_URL
   required: true
-  value: "https://chat.pathfinder.gov.bc.ca/api/v1/"
+  value: "https://chat.pathfinder.gov.bc.ca"
 - description: Rocket.Chat rooms to search
   displayName: The ids of the Rocket.Chat rooms to be searched
   name: ROCKETCHAT_ROOM_IDS

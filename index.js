@@ -13,6 +13,7 @@ const typeDefs = gql`
   type SearchResult {
     id: String
     message: String
+    url: String
     author: String
     time: String
     roomId: String    
