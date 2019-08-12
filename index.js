@@ -8,7 +8,14 @@ const RocketChatAPI = require('./datasources/rocket.chat');
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
+// @todo should expose a room query, and leverage that *within* the search query
 const typeDefs = gql`      
+    
+
+  type Room {
+    id: String
+    name: String
+  }
     
   type SearchResult {
     id: String
@@ -16,7 +23,8 @@ const typeDefs = gql`
     url: String
     author: String
     time: String
-    roomId: String    
+    roomId : String
+    room: Room       
   } 
 
   # The "Query" type is the root of all GraphQL queries.
@@ -34,6 +42,8 @@ const resolvers = {
             searchString: searchString
         })
     }
+
+
 };
 
 // Start ApolloServer by passing type definitions (typeDefs) and the resolvers
