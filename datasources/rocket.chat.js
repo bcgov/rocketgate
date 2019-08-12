@@ -6,7 +6,8 @@ class RocketChatAPI extends RESTDataSource {
     constructor({ baseURL, authToken, userId}) {
         super();
 
-        this.baseURL = baseURL;
+        this.appURL = baseURL;
+        this.baseURL = `${baseURL}/api/v1/`;
         this.authToken = authToken;
         this.userId = userId;
     }
@@ -16,22 +17,38 @@ class RocketChatAPI extends RESTDataSource {
         request.headers.set('X-User-Id', this.userId);
     }
 
-    static messageSearchResultReducer(message, roomId) {
+    messageSearchResultReducer(message, roomInfo) {
         return {
             id: message._id,
             message: message.msg,
+            url: `${this.appURL}/channel/${roomInfo.name}?msg=${message._id}`,
             author: message.u.name,
             time: message.ts,
-            roomId: roomId
+            roomId: roomInfo.id,
+            room: {
+                id: roomInfo.id,
+                name: roomInfo.name,
+            }
         };
+    }
+
+    static roomInfoReducer(room) {
+        return {
+            id: room._id,
+            name: room.name
+        }
     }
 
     async searchRoom({ roomId, searchString }) {
 
+        let roomInfoResponse = await this.get('rooms.info', { roomId: roomId });
+
+        const roomInfo = RocketChatAPI.roomInfoReducer( roomInfoResponse.room);
+
         const response = await this.get('chat.search', { searchText: searchString, roomId: roomId });
 
         return Array.isArray(response.messages)
-            ? response.messages.map(message=> RocketChatAPI.messageSearchResultReducer(message, roomId))
+            ? response.messages.map(message=> this.messageSearchResultReducer(message, roomInfo))
             : [];
     }
 
