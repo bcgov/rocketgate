@@ -16,7 +16,7 @@ const phases = {
         tag: `build-${version}-${changeId}`
     },
     dev: {
-        namespace: 'devhub-dev',
+        namespace: 'pltfrm-dev',
         name: `${name}`,
         phase: 'dev',
         changeId: changeId,
