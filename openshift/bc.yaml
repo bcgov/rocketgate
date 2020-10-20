@@ -80,4 +80,4 @@ parameters:
   displayName: NODE_JS_VERSION
   name: NODE_JS_VERSION
   required: true
-  value: '10'
+  value: '12'
