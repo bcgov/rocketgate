@@ -6,7 +6,7 @@ const name = 'rocketgate'
 
 const phases = {
     build: {
-        namespace: 'devhub-tools',
+        namespace: 'pltfrm-tools',
         name: `${name}`,
         phase: 'build',
         changeId: changeId,
@@ -26,7 +26,7 @@ const phases = {
         tag: `dev-${version}-${changeId}`
     },
     test: {
-        namespace: 'devhub-test',
+        namespace: 'pltfrm-test',
         name: `${name}`,
         phase: 'test',
         changeId: changeId,
@@ -34,10 +34,9 @@ const phases = {
         instance: `${name}-test`,
         version: `${version}`,
         tag: `test-${version}`,
-        host: "rocketgate-test.pathfinder.gov.bc.ca"
     },
     prod: {
-        namespace: 'devhub-prod',
+        namespace: 'pltfrm-prod',
         name: `${name}`,
         phase: 'prod',
         changeId: changeId,
@@ -45,7 +44,6 @@ const phases = {
         instance: `${name}-prod`,
         version: `${version}`,
         tag: `prod-${version}`,
-        host: "rocketgate.pathfinder.gov.bc.ca"
     },
 };
 
