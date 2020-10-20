@@ -16,8 +16,7 @@ module.exports = (settings) => {
         param: {
             NAME: phases[phase].name,
             SUFFIX: phases[phase].suffix,
-            VERSION: phases[phase].tag,
-            HOST: phases[phase].host ? phases[phase].host : `rocketgate-${phase}-${changeId}-${phases[phase].namespace}.pathfinder.gov.bc.ca`
+            VERSION: phases[phase].tag
         },
     });
 

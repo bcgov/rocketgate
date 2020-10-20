@@ -12,8 +12,8 @@ const phases = {
         changeId: changeId,
         suffix: `-build-${changeId}`,
         instance: `${name}-build-${changeId}`,
-        version: `${version}-${changeId}`,
-        tag: `build-${version}-${changeId}`
+        version: `${changeId}`,
+        tag: `build-${changeId}`
     },
     dev: {
         namespace: 'pltfrm-dev',
@@ -22,8 +22,8 @@ const phases = {
         changeId: changeId,
         suffix: `-dev-${changeId}`,
         instance: `${name}-dev-${changeId}`,
-        version: `${version}-${changeId}`,
-        tag: `dev-${version}-${changeId}`
+        version: `${changeId}`,
+        tag: `dev-${changeId}`
     },
     test: {
         namespace: 'pltfrm-test',
