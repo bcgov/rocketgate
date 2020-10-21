@@ -9,12 +9,20 @@ objects:
   kind: ImageStream
   metadata:
     name: ${NAME}
+    labels:
+      app: ${NAME}${SUFFIX}
+      group: ${NAME}
+      component: ${NAME}-imagestream
   spec:
     lookupPolicy:
       local: false
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
+    labels:
+      app: ${NAME}${SUFFIX}
+      group: ${NAME}
+      component: ${NAME}-deploymentconfig
     name: ${NAME}${SUFFIX}
   spec:
     minReadySeconds: 20 # should be ready for atleast 20 seconds before the container is considered available. This will allow us
@@ -84,6 +92,10 @@ objects:
   kind: Service
   metadata:
     name: ${NAME}${SUFFIX}
+    labels:
+      app: ${NAME}${SUFFIX}
+      group: ${NAME}
+      component: ${NAME}-service
   spec:
     ports:
     - name: web
@@ -98,6 +110,10 @@ objects:
     annotations:
       haproxy.router.openshift.io/disable_cookies: 'true'
     name: ${NAME}${SUFFIX}
+    labels:
+      app: ${NAME}${SUFFIX}
+      group: ${NAME}
+      component: ${NAME}-route
   spec:
     host: ${HOST}
     port:
@@ -113,7 +129,11 @@ objects:
 - apiVersion: v1
   kind: ConfigMap
   metadata:
-      name: rocketgate-config
+    name: rocketgate-config
+    labels:
+      app: ${NAME}${SUFFIX}
+      group: ${NAME}
+      component: ${NAME}-configmap
   data:
     rocketChatRooms: ${ROCKETCHAT_ROOM_IDS}
     rocketChatURL: ${ROCKETCHAT_BASE_URL}
