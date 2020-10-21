@@ -9,6 +9,10 @@ objects:
   kind: ImageStream
   metadata:
     name: ${NAME}
+    labels:
+      app: ${NAME}${SUFFIX}
+      group: ${NAME}
+      component: ${NAME}-imagestream
   spec:
     lookupPolicy:
       local: false
@@ -16,6 +20,10 @@ objects:
   kind: BuildConfig
   metadata:
     name: ${NAME}${SUFFIX}
+    labels:
+      app: ${NAME}${SUFFIX}
+      group: ${NAME}
+      component: ${NAME}-buildconfig
   spec:
     completionDeadlineSeconds: 1500 # terminate the build if it takes longer than 900 seconds, our builds are avg 10 minutes as of Feb 2019
     nodeSelector: null
@@ -80,4 +88,5 @@ parameters:
   displayName: NODE_JS_VERSION
   name: NODE_JS_VERSION
   required: true
-  value: '10'
+  value: '12'
+  

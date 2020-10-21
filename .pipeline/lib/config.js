@@ -1,32 +1,32 @@
 'use strict';
-const options = require('pipeline-cli').Util.parseArguments()
+const options = require('@bcgov/pipeline-cli').Util.parseArguments()
 const changeId = options.pr //aka pull-request
 const version = '1.0.0'
 const name = 'rocketgate'
 
 const phases = {
     build: {
-        namespace: 'devhub-tools',
+        namespace: 'pltfrm-tools',
         name: `${name}`,
         phase: 'build',
         changeId: changeId,
         suffix: `-build-${changeId}`,
         instance: `${name}-build-${changeId}`,
-        version: `${version}-${changeId}`,
-        tag: `build-${version}-${changeId}`
+        version: `${changeId}`,
+        tag: `build-${changeId}`
     },
     dev: {
-        namespace: 'devhub-dev',
+        namespace: 'pltfrm-dev',
         name: `${name}`,
         phase: 'dev',
         changeId: changeId,
         suffix: `-dev-${changeId}`,
         instance: `${name}-dev-${changeId}`,
-        version: `${version}-${changeId}`,
-        tag: `dev-${version}-${changeId}`
+        version: `${changeId}`,
+        tag: `dev-${changeId}`
     },
     test: {
-        namespace: 'devhub-test',
+        namespace: 'pltfrm-test',
         name: `${name}`,
         phase: 'test',
         changeId: changeId,
@@ -34,10 +34,9 @@ const phases = {
         instance: `${name}-test`,
         version: `${version}`,
         tag: `test-${version}`,
-        host: "rocketgate-test.pathfinder.gov.bc.ca"
     },
     prod: {
-        namespace: 'devhub-prod',
+        namespace: 'pltfrm-prod',
         name: `${name}`,
         phase: 'prod',
         changeId: changeId,
@@ -45,7 +44,6 @@ const phases = {
         instance: `${name}-prod`,
         version: `${version}`,
         tag: `prod-${version}`,
-        host: "rocketgate.pathfinder.gov.bc.ca"
     },
 };
 
