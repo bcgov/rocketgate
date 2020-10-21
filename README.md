@@ -15,7 +15,7 @@ Ideally you want this to be managed by a pipeline :)
 
 ### Pre Reqs:
 
-1. Install the secret: `oc process -f openshift/secret.yaml -p TOKEN=<rocketchat auth token> -p USER_ID=<rocketchat user id> | oc apply of -`
+1. Install the secret: `oc process -f openshift/secret.yaml -p TOKEN=<rocketchat auth token> -p USER_ID=<rocketchat user id> | oc apply -f -`
 
 ## Run via Pipeline CLI
 2. This requires an open PR in your github repo! 
